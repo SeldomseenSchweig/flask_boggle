@@ -17,3 +17,14 @@ def display_board():
     return render_template('boggle_home.html', board=board)
 
 
+@app.route("/check-word")
+def check_word():
+    word = request.args["word"]
+    # print( request.args["word"])
+    print("*********************************************")
+    print(boggle_game.check_valid_word(session['game_board'], word))
+    print("*********************************************")
+
+    return word
+
+
