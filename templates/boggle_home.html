@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Boggle {% endblock %}
+
+{% block banner %} Boggle! {% endblock %}
+
+{% block content %}
+{% for row in board %} 
+   <div>{{row}}</div>
+{% endfor %}
+<form id="form" >
+    <input type="text" name="word" id="word">
+    <button type="submit" id="button"> Check Word</button>
+</form>
+{% endblock %}
