@@ -12,6 +12,20 @@
         {% block content %}
         {% endblock %}
     </main>
+    <table>
+        <tr>
+          <th>Correct Words</th>
+          <th>   |   </th>
+          <th>Wrong Words</th>
+        </tr>
+        {% block answer %}
+        {% endblock %}
+        <td> | </td>
+        {% block answer1 %}
+        {% endblock %}
+
+
+    </table>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/static/boggle.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
