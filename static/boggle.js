@@ -1,15 +1,20 @@
 let score = 0;
-guesses = []
+let guesses = [];
+let time = 1
+
+
+
+
 
 async function send_word_to_server(input) {
 
     const response = await axios.get ("/check-word", { params: { word: input }});    
-    wordLength = input.length
-    let data = response.data.result
+    wordLength = input.length;
+    let data = response.data.result;
     if (alreadyGuessed(input) ) {
-        $('#message').text(' has already been guessed.')
+        $('#message').text(' has already been guessed.');
     } else {
-        updateScore(data, wordLength,input)
+        updateScore(data, wordLength,input);
     }
 
     }
@@ -17,11 +22,11 @@ async function send_word_to_server(input) {
 
   $(document).on('click','#button', (e) => {
       e.preventDefault();
+      setInterval(timer, 1000);
       input = $('#word').val();
-      if (input === null){
-          alert("Enter a word please")
+      if (input.length === 0 ){
+          alert("Enter a word please");
       }
-      console.log(input)
       send_word_to_server(input);
       $('#word').val('')
   });
@@ -48,6 +53,24 @@ async function send_word_to_server(input) {
         }
         guesses.push(input)
     return false
+
+    }
+    
+    
+
+    function timer() { 
+        if (time < 6){
+            $('#timer').text(time++)
+        }else{
+            $('#button').prop('disabled', true)
+            clearInterval(1)
+        }
+    }
+
+    function send_game_stats_to_server(time) {
+        if (time >= 60){
+
+        }
 
     }
 
