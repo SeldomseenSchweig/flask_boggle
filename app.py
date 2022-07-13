@@ -24,13 +24,14 @@ def display_board():
 def check_word():
     word = request.args["word"]
     print (boggle_game.check_valid_word(session['game_board'], word))
-    result = {'result': boggle_game.check_valid_word(session['game_board'], word)}
+    result = {"result": boggle_game.check_valid_word(session['game_board'], word)}
+    result = jsonify(result)
     return result
 
 @app.route('/score', methods=["POST"])
 def keep_score():
     score = score + 1
-    return render_template('boggle_home.html', board = session['game_board'], score = score)
+    return score
 
 
 
