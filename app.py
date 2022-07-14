@@ -15,8 +15,17 @@ def display_board():
     """ This takes us to the main page updates player with hi score and number when the game restarts"""
     board = boggle_game.make_board()
     session['game_board'] = board
-    session['number_of_games']
-    session['hi_score']
+    if not session.get('number_of_games'):
+        session['number_of_games'] = 0
+    else:
+        session['number_of_games']
+
+    if not session.get('hi_score'):
+        session['hi_score'] = 0
+    else:
+        session['hi_score']
+
+
     return render_template('boggle_home.html',board=board, hi_score=session['hi_score'] )
 
 
@@ -31,10 +40,10 @@ def check_word():
 
 @app.route('/score', methods=['POST'])
 def keep_score():
-    """Supposed to update hi_score and number of games, un-implimented """
+    """Updates hi_score and number of games"""
+
     hi_score = session['hi_score']
     session['number_of_games'] = session['number_of_games'] + 1
-    number_of_games = session['number_of_games']
     score = request.get_data('points')
     score = json.loads(score)
     score = score['points']
