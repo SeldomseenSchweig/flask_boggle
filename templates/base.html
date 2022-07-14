@@ -9,7 +9,7 @@
 <body>
  
     <h1>{% block banner%} {% endblock %}</h1>
-    <span >{% block highScore %} {% endblock %} </span>
+    <span>All Time High Score: <span id="high-score" > {% block highScore %} {{hi_score}}{% endblock %}</span></span>
     <main>
         {% block content %}
         {% endblock %}

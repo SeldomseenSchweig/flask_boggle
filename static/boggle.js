@@ -25,7 +25,7 @@ async function sendScoreToServer(score){
 
     const response = await axios.post ("/score", { points: score });
     let data = response.data.hi_score;
-    $('#highScore').text(data);
+    $('#high-score').text(data);
 
 }
 
@@ -70,6 +70,7 @@ $(document).on('click','#begin', (e) => {
         $('#message').text(' is not on the board.')
       }else{
         $('#message').text(' is not even a word!')
+        $('#wrong').append(`<td> ${input}</td>`)
       }
       }
     
