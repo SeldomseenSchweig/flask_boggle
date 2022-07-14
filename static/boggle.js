@@ -1,12 +1,14 @@
 let score = 0;
 let guesses = [];
 let time = 1
+let gameOver = false
 
 
 
 
 
-async function send_word_to_server(input) {
+async function sendWordToServer(input) {
+    // Sends word to server to check if it's on the board and in the text
 
     const response = await axios.get ("/check-word", { params: { word: input }});    
     wordLength = input.length;
@@ -18,19 +20,32 @@ async function send_word_to_server(input) {
     }
 
     }
+async function sendScoreToServer(score){
+    //Supposed to send the score to the backend 
+    // to update high score and trigger a count of the number of games played
 
 
+    const response = await axios.get ("/score", { params: { score: score }});
+
+}
+
+// Respnds to click, sends word through ajax/axios to back end
+// starts timer for the game. Timer doesn't sstop sometimes(Need to fix)
   $(document).on('click','#button', (e) => {
       e.preventDefault();
-      setInterval(timer, 1000);
+      myInterval = setInterval(timer, 1000); 
       input = $('#word').val();
       if (input.length === 0 ){
           alert("Enter a word please");
       }
-      send_word_to_server(input);
+      sendWordToServer(input);
       $('#word').val('')
   });
 
+
+
+
+//   updates score on front und and gives message to user about word being used
   function updateScore(data, wordLength, input) {
       if (data === "ok"){
         $('#score').text(score = score + wordLength)
@@ -45,6 +60,9 @@ async function send_word_to_server(input) {
       }
       }
     
+
+
+    //   checks if the word has already been guessed
     function alreadyGuessed(input) {
         console.log(guesses)
         if (guesses.includes(input)){
@@ -57,22 +75,21 @@ async function send_word_to_server(input) {
     }
     
     
-
+// Timer function, something is wrong, it doesn't 
+// stop nor does it send data about score to back end
     function timer() { 
-        if (time < 6){
+        if (time <= 6){
             $('#timer').text(time++)
         }else{
+            clearInterval(myInterval)
             $('#button').prop('disabled', true)
-            clearInterval(1)
+            sendScoreToServer(score)
         }
     }
 
-    function send_game_stats_to_server(time) {
-        if (time >= 60){
 
-        }
 
-    }
+
 
 
 
