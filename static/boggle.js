@@ -9,7 +9,7 @@ let time = 1
 async function sendWordToServer(input) {
     // Sends word to server to check if it's on the board and in the text
 
-    const response = await axios.get("/check-word", { params: { word: input }});    
+    const response = await axios.post("/check-word", { word: input });    
     wordLength = input.length;
     let data = response.data.result;
     if (alreadyGuessed(input) ) {
@@ -62,15 +62,15 @@ $(document).on('click','#begin', (e) => {
   function updateScore(data, wordLength, input) {
       if (data === "ok"){
         $('#score').text(score = score + wordLength)
-        $('#correct').append(`<td> ${input}</td>`)
-        $('#message').text('is valid and on the board.')
+        $('#guessed').append(`<td> ${input}</td>`)
+        $('#message').text('Your word is valid and on the board.')
 
       }else if ( data === "not-on-board" ){
-        $('#wrong').append(`<td> ${input}</td>`)
-        $('#message').text(' is not on the board.')
+        $('#guessed').append(`<td class="wrong"> ${input}</td>`)
+        $('#message').text(' Your word is not on the board.')
       }else{
-        $('#message').text(' is not even a word!')
-        $('#wrong').append(`<td> ${input}</td>`)
+        $('#message').text('Your word is not even a word!')
+        $('#guessed').append(`<td class="wrong"> ${input}</td>`)
       }
       }
     

@@ -1,0 +1,49 @@
+
+h1{
+    text-align: center;
+    font-size: 100px;
+    margin: 0 auto; 
+}
+body{
+    background-color: blue;
+}
+.highScore{
+
+    text-align: center;
+    font-size: 25px;
+    margin: 0 auto;
+    display: table;
+}
+.letter{
+    background-color: blue;
+    color: white;
+}
+.wrong{
+    color: orange;
+}
+td{
+    text-align: center;
+}
+
+.board{
+
+    text-align: center;
+    font-size: 25px;
+    letter-spacing: 40px;
+    display: table;
+    margin: 5px;
+    width: 100%;
+    
+}
+button{
+    margin: 10px;
+}
+.interaction{
+    border: 5px solid, blue;
+    text-align: center;
+    font-size: 25px;
+    display: table;
+    margin: 0 auto;
+
+
+}

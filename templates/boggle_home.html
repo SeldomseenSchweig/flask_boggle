@@ -2,21 +2,44 @@
 {% block title %}Boggle {% endblock %}
 
 {% block banner %} Boggle! {% endblock %}
-{% block highScore %}{{hi_score}}{% endblock %}
-{% block content %}
-{% for row in board %} 
-   <div>{{row}}</div>
-{% endfor %}
-<form id="form" >
-    <input type="text" name="word" id="word">
-    <button type="submit" id="button" disabled="false" > Check Word</button>
 
-</form><span id="start" ></span>
-<span> Score: <span id="score"> 0 </span> | </span>
-<span> Timer <span id="timer"> </span> | </span>
-<span> Your word <span id="message">  </span></span>
-<button id="begin"> Start </button>
-<a href="/"><button id="restart"> New Game </button></a>
+
+{% block content %}
+<span class="highScore">All Time High Score: <span id="high-score" > {% block highScore %} {{hi_score}}{% endblock %}</span></span>
+<section>
+    {% for row in board %} 
+<div class="board">
+     {% for item in row %}
+    <span class="letter">{{item}}</span>
+    
+    {% endfor %}
+</div>
+   
+{% endfor %}
+    
+</section>
+
+<section class="interaction">
+    <form id="form" >
+        <input type="text" name="word" id="word">
+        <button type="submit" id="button" disabled="false" > Check Word</button>
+    
+    </form><span id="start" ></span>
+    <span> Score: <span id="score"> 0 </span> | </span>
+    <span> Timer <span id="timer"> </span> | </span>
+    <div>Message: <span id="message"> </span></div>
+    <button id="begin"> Start </button>
+    <a href="/"><button id="restart"> New Game </button></a>
+    <table>
+        <tr>
+          <th> Words Guessed</th>
+        </tr>
+        <tr>
+        <td id="guessed"> </td>
+        </tr>
+    </table>
+</section>
+
 {% endblock %}
 
 

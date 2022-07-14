@@ -29,11 +29,12 @@ def display_board():
     return render_template('boggle_home.html',board=board, hi_score=session['hi_score'] )
 
 
-@app.route("/check-word")
+@app.route("/check-word", methods=["POST"])
 def check_word():
-    """Sends checks word sent from ajax returns result back"""
-    word = request.args["word"]
-    print (boggle_game.check_valid_word(session['game_board'], word))
+    """Sends word sent from ajax, checks it and returns result back"""
+    word = request.get_data("word")
+    word = json.loads(word)
+    word = word['word']
     result = {"result": boggle_game.check_valid_word(session['game_board'], word)}
     result = jsonify(result)
     return result
