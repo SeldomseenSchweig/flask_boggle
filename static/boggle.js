@@ -46,8 +46,14 @@ async function sendScoreToServer(score){
 
    
 // });
+$(document).on('click','#begin', (e) => {
+    e.preventDefault();
+    $('#button').prop('disabled', false);
+    myInterval = setInterval(timer, 1000); 
+    $('#begin').attr('disabled', 'true');
 
-  myInterval = setInterval(timer, 1000); 
+});
+  
 
 
 
@@ -85,13 +91,12 @@ async function sendScoreToServer(score){
 // Timer function, something is wrong, it doesn't 
 // stop nor does it send data about score to back end
     function timer() { 
-        if (time <= 5){
+        if (time <= 30){
             $('#timer').text(time++)
         }else{
             clearInterval(myInterval)
             $('#button').prop('disabled', true)
             sendScoreToServer(score)
-            $('#start').append('<a href="/"><button id="restart"> Restart </button></a>')
 
         }
     }
