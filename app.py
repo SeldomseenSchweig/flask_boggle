@@ -15,8 +15,8 @@ def display_board():
     """ This takes us to the main page updates player with hi score and number when the game restarts"""
     board = boggle_game.make_board()
     session['game_board'] = board
-    session['number_of_games'] = 0
-    session['hi_score'] = 0
+    session['number_of_games']
+    session['hi_score']
     return render_template('boggle_home.html', board=board, hi_score =session['hi_score'])
 
 

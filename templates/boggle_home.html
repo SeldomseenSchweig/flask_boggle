@@ -2,7 +2,7 @@
 {% block title %}Boggle {% endblock %}
 
 {% block banner %} Boggle! {% endblock %}
-{% block hi_score %} {{hi_score}} {% endblock %}
+{% block highScore %}All Time High Score: {{hi_score}}{% endblock %}
 {% block content %}
 {% for row in board %} 
    <div>{{row}}</div>
@@ -10,7 +10,7 @@
 <form id="form" >
     <input type="text" name="word" id="word">
     <button type="submit" id="button"> Check Word</button>
-</form>
+</form><span id="start" ></span>
 <span> Score: <span id="score"> 0 </span> | </span>
 <span> Timer <span id="timer"> </span> | </span>
 <span> Your word <span id="message">  </span></span>

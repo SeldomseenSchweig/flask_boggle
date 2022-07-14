@@ -1,7 +1,6 @@
 let score = 0;
 let guesses = [];
 let time = 1
-let gameOver = false
 
 
 
@@ -42,11 +41,11 @@ async function sendScoreToServer(score){
       sendWordToServer(input);
       $('#word').val('')
   });
-  $(document).on('click','#restart', (e) => {
-      e.preventDefault();
+//   $(document).on('click','#restart', (e) => {
+//       e.preventDefault();
 
    
-});
+// });
 
   myInterval = setInterval(timer, 1000); 
 
@@ -92,7 +91,7 @@ async function sendScoreToServer(score){
             clearInterval(myInterval)
             $('#button').prop('disabled', true)
             sendScoreToServer(score)
-            $('#form').append(`<button id="restart"> Restart </button>`)
+            $('#start').append('<a href="/"><button id="restart"> Restart </button></a>')
 
         }
     }
