@@ -10,7 +10,7 @@ let gameOver = false
 async function sendWordToServer(input) {
     // Sends word to server to check if it's on the board and in the text
 
-    const response = await axios.get ("/check-word", { params: { word: input }});    
+    const response = await axios.get("/check-word", { params: { word: input }});    
     wordLength = input.length;
     let data = response.data.result;
     if (alreadyGuessed(input) ) {
@@ -24,8 +24,9 @@ async function sendScoreToServer(score){
     //Supposed to send the score to the backend 
     // to update high score and trigger a count of the number of games played
 
-
-    const response = await axios.get ("/score", { params: { score: score }});
+    const response = await axios.post ("/score", { points: score });
+    let data = response.data.hi_score;
+    $('#highScore').text(data);
 
 }
 
@@ -33,7 +34,7 @@ async function sendScoreToServer(score){
 // starts timer for the game. Timer doesn't sstop sometimes(Need to fix)
   $(document).on('click','#button', (e) => {
       e.preventDefault();
-      myInterval = setInterval(timer, 1000); 
+      
       input = $('#word').val();
       if (input.length === 0 ){
           alert("Enter a word please");
@@ -41,6 +42,13 @@ async function sendScoreToServer(score){
       sendWordToServer(input);
       $('#word').val('')
   });
+  $(document).on('click','#restart', (e) => {
+      e.preventDefault();
+
+   
+});
+
+  myInterval = setInterval(timer, 1000); 
 
 
 
@@ -49,11 +57,11 @@ async function sendScoreToServer(score){
   function updateScore(data, wordLength, input) {
       if (data === "ok"){
         $('#score').text(score = score + wordLength)
-        $('#correct').append(`<td> ${input}<td/>`)
+        $('#correct').append(`<td> ${input}</td>`)
         $('#message').text('is valid and on the board.')
 
       }else if ( data === "not-on-board" ){
-        $('#wrong').append(`<td> ${input}<td/>`)
+        $('#wrong').append(`<td> ${input}</td>`)
         $('#message').text(' is not on the board.')
       }else{
         $('#message').text(' is not even a word!')
@@ -78,12 +86,14 @@ async function sendScoreToServer(score){
 // Timer function, something is wrong, it doesn't 
 // stop nor does it send data about score to back end
     function timer() { 
-        if (time <= 6){
+        if (time <= 5){
             $('#timer').text(time++)
         }else{
             clearInterval(myInterval)
             $('#button').prop('disabled', true)
             sendScoreToServer(score)
+            $('#form').append(`<button id="restart"> Restart </button>`)
+
         }
     }
 
